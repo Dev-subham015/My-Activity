@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+  <div class="container">
+    
+    
+    
+    <h2 class="pt-5">Login to Activity</h2>
+
+{% for message in messages %}
+
+
+<div class="alert  {{ message.tags }} alert-dismissible fade show" role="alert">
+  <strong>{{ message }}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+
+ {% endfor %}
+
+
+    <form class="my-0 py-5" method="POST">
+    {% csrf_token %}
+      <div class="form-group py-1">
+        <input name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Username or email">
+      </div>
+      <div class="form-group py-1">
+        
+        <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      </div>
+      
+      <button type="submit" class="my-4 btn btn-secondary btn-lg btn-block">submit</button>
+    </form>
+    
+    <div class="flex">
+      <p>Don't have an account? </p>
+      <p><a class="link-offset-2 link-underline link-underline-opacity-0" href="{% url "signup" %}">Sign up</a></p>
+    </div>
+  </div>
+
+
+
+{% endblock %}

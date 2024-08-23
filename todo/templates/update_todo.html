@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <form class="py-5 my-5" method="POST">
+        {% csrf_token %}
+        <div class="form-group py-1">
+            <input name="title" type="text" class="form-control" id="title" placeholder="Todo title" value="{{ todos.title }}" required>
+        </div>
+        <div class="form-group py-1">
+            <input name="description" type="text" class="form-control" placeholder="Todo description" id="subject" value="{{ todos.description }}" required>
+        </div>
+        <button type="submit" class="my-4 btn btn-secondary btn-dark btn-block">Update</button>
+    </form>
+</div>
+{% endblock %}

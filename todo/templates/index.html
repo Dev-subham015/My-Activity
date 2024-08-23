@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<div class="container">
+      <h2 style="text-align:center;" class="p-4">Submit you Activity</h2>
+ {% for message in messages %}
+
+
+<div class="my-2 alert  {{ message.tags }} alert-dismissible fade show" role="alert">
+  <strong>{{ message }}</strong>
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+
+ {% endfor %}     
+      
+      
+      
+      
+      <form class="py-3 my-3" method="POST">
+        {% csrf_token %}
+        <div class="form-group py-1">
+          
+          <input name="title" type="text" class="form-control" id="title" placeholder="Todo title" required>
+        </div>
+        <div class="form-group py-1">
+
+          <input name="description" type="text" class="form-control" placeholder="todo subject" id="subject" required>
+        </div>
+
+        <button type="submit" class="my-4 btn btn-secondary btn-lg btn-block">submit</button>
+      </form>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+     <div class="table-op">
+     {% if user.is_authenticated %}   
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Subject</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+  {% for todo in todos %}
+          <tr>
+            <th scope="row">{{forloop.counter}}</th>
+            <td>{{todo.title}}</td>
+            <td>{{todo.description}}</td>
+            <td style="display: flex"><a href="{% url 'update' todo.id %}" style="color: #fff" class="m-1 btn btn-dark">update</a>
+            
+<form action="{% url 'delete' todo.id %}" method="POST" style="display:inline;">
+    {% csrf_token %}
+    <button type="submit" class="m-1 btn btn-dark">Delete</button>
+</form>
+
+            </td>
+          </tr>
+  {% endfor %}        
+        </tbody>
+      </table>
+ {% else %}     
+ <p style="text-align:center;">No Result. please login to your account to submit your todo.</p>
+      </div>
+ {% endif %}     
+
+
+{% endblock %}
